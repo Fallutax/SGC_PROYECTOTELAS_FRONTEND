@@ -1,19 +1,59 @@
+import {useEffect} from 'react'
 import {useForm} from 'react-hook-form'
-import {createTask, deleteTask } from '../api/tasks.api'
+import {createTask, deleteTask, updateTask, getTask } from '../api/tasks.api'
 import {useNavigate, useParams} from 'react-router-dom'
+import {toast} from 'react-hot-toast'
 
 
 export function TaskFormPage() {
 
-  const {register, handleSubmit, formState: {errors}} = useForm()
+  const {register, handleSubmit, formState: {errors},
+  setValue
+} = useForm()
+
   const navigate = useNavigate()
   const params = useParams()
-  console.log(params)
+  // console.log(params)
 
   const onsubmit = handleSubmit(async data => {
-   await createTask(data);
-  navigate("/tasks");
-  })
+      if (params.id){
+        await updateTask(params.id, data)
+        toast.success('tarea actualizada',{
+          position: "bottom-right",
+          style: {
+            background: "#101010",
+            color: "#fff",
+          }
+        })
+    } else {
+      await createTask(data);
+      toast.success('tarea creada',{
+        position: "bottom-right",
+        style: {
+          background: "#101010",
+          color: "#fff",
+        }
+      })
+    }
+
+    navigate("/tasks");
+  //  await createTask(data);
+   navigate("/tasks", );
+  });
+
+  useEffect(() => {
+    async function loadTask() { 
+      if (params.id) {
+        const {
+          data: {title, description},
+        } = await getTask(params.id);
+        setValue("title", title);
+        setValue("description", description);
+      }
+    }
+    loadTask();
+  }, []);
+
 
     return (
       <div>
@@ -33,6 +73,13 @@ export function TaskFormPage() {
           const accepted = window.confirm("are you sure you want to delete it?") 
           if (accepted) {
           await deleteTask(params.id)
+          toast.success('tarea eliminada',{
+            position: "bottom-right",
+            style: {
+              background: "#101010",
+              color: "#fff",
+            }
+          })
           navigate("/tasks");
           }
         }}>
