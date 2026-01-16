@@ -55,7 +55,7 @@ export const Footer = () => {
                 reservados a Armando Martinez, Ramses Barreto, Jorge holguin.
               </p>
               <p className="mt-0.5">
-                Desarrollado Didren y el Castillo, Venezuela
+                Desarrollado para Didren y el Castillo, Venezuela
               </p>
             </div>
           </div>

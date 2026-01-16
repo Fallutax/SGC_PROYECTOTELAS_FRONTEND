@@ -5,7 +5,7 @@ export function Button({ title, description }) {
   return (
     <div
       className={
-        "bg-gradient-to-br from-[#3a3b3c] to-[#2a2b2c] hover:from-[#4a4b4c] hover:to-[#3a3b3c] text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform border border-gray-600 hover:border-gray-500 text-left w-full ${cl} "
+        "bg-gradient-to-br from-[#3a3b3c] to-[#2a2b2c] hover:from-[#4a4b4c] hover:to-[#ec4444] text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-600 hover:border-[#ec4444] text-left w-full cursor-pointer "
       }
     >
       <div className="flex gap-10 py-2 min-h-22">
@@ -19,6 +19,7 @@ export function Button({ title, description }) {
         <div className="max-w-full">
           <h4 className="text-white font-bold text-[20px]">{title}</h4>
           <p className="text-white font-lg">{description}</p>
+   
         </div>
       </div>
     </div>

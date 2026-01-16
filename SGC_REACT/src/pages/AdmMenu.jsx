@@ -3,43 +3,64 @@ import { Navbar } from "../components/navbar";
 import { Button } from "../components/Button";
 import { Footer } from "../components/footer";
 import People from "../assets/person-check-fill.svg";
-
+      <Navbar />
 export function AdmMenu() {
   return (
-    <div class="bg-[#262729]">
-      <Navbar />
+    <div className="min-h-screen flex flex-col relative bg-gray-900">
 
-      <div className="text-center mt-10">
-        <h1 className="text-4xl font-bold text-white mb-2">
-          Panel de Administración
-        </h1>
-        <p className="text-gray-300 text-lg">
-          Gestión integral del sistema de telas
-        </p>
-      </div>
+    <div 
+      className="absolute inset-0 z-0"
+      style={{
+        backgroundImage: `linear-gradient(rgba(216, 68, 68, 0.6), rgba(30, 30, 42, 0.95)), url('/src/assets/wallpaper.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    />
 
-      <div class="w-full h-full flex justify-center items-center min-h-screen">
-        <section
-          id="funcionalidades"
-          class=" flex flex-col gap-y-8 w-screen p-4  "
-        >
-          <Button
-            title="Gestion de Vendedoras"
-            description="Control de Vendedoras"
-          />
-          <Button title="Gestion de Telas" description="Control de las Telas" />
-          <Button
-            title="Gestion de Retazos"
-            description="Control de los Retazos"
-          />
-          <Button
-            title="Dashboard Estadistico"
-            description="Graficos de Interes"
-            imagen={<People className="h-8 w-8 text-indigo-600" />}
-          />
+    <main className="relative z-10 flex-1 flex justify-center items-center px-4 py-8">
+      <section
+        id="funcionalidades"
+        className="flex flex-col gap-y-6 w-full max-w-6xl"
+      >
+
+
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Panel de Administración
+            </h1>
+            <p className="text-gray-300 text-lg">
+              Gestión integral del sistema de telas
+            </p>
+          </div>
+
+          {/* Grid responsive */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Button
+              title="Gestión de Vendedoras"
+              description="Control de Vendedoras"
+    
+            />
+            <Button 
+              title="Gestión de Telas" 
+              description="Control de las Telas" 
+      
+            />
+            <Button
+              title="Gestión de Retazos"
+              description="Control de los Retazos"
+          
+            />
+            <Button
+              title="Dashboard Estadístico"
+              description="Gráficos de Interés"
+         
+            />
+          </div>
         </section>
-      </div>
-      <Footer />
+      </main>
+
     </div>
   );
 }
+      <Footer />
+export default AdmMenu;

@@ -6,7 +6,7 @@ export function Navbar() {
   return (
     <nav
       id="nav-bar"
-      className="bg-[#3b3c3e] shadow-sm border-b-10 border-[#ec4444]"
+      className="bg-[#3b3c3e] shadow-sm border-b-10 border-[#ec4444]/60"
     >
       <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
