@@ -1,4 +1,7 @@
-body {
-  background: #202020;
-  color: whitesmoke;
+@import "tailwindcss";
+
+body{
+    background-color: #262729;
+    color: whitesmoke;
+    font-family: 'Arial', sans-serif;
 }

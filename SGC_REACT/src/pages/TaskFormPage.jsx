@@ -1,8 +1,14 @@
+import React from "react";
 import {useEffect} from 'react'
 import {useForm} from 'react-hook-form'
 import {createTask, deleteTask, updateTask, getTask } from '../api/tasks.api'
 import {useNavigate, useParams} from 'react-router-dom'
 import {toast} from 'react-hot-toast'
+import { Navbar } from "../components/Navbar"
+import {Btns} from '../components/Btns'
+
+
+
 
 
 export function TaskFormPage() {
@@ -56,7 +62,10 @@ export function TaskFormPage() {
 
 
     return (
+      
       <div>
+        <Navbar/>
+        <Btns/>
         <form onSubmit={onsubmit}>
           <input type="text" placeholder="title" 
           {...register("title", {required: true })}
