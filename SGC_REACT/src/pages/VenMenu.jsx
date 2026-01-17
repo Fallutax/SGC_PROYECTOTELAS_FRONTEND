@@ -1,9 +1,9 @@
 import React from "react";
-import { Navbar } from "../components/navbar";
-import { Button } from "../components/Button";
-import { Footer } from "../components/footer";
 
-<Navbar />
+import { Button } from "../components/Button";
+
+
+
 export function VenMenu() {
   return (
     <div className="min-h-screen flex flex-col relative bg-gray-900">
@@ -52,5 +52,5 @@ export function VenMenu() {
     </div>
   );
 }
-    <Footer />
+ 
 export default VenMenu;
