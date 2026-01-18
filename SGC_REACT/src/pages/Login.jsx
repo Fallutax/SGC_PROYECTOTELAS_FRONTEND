@@ -1,52 +1,79 @@
-// import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useAuth } from '../hooks/useAuth';
-// import { authService } from '../services/authService';
+import React from "react";
+import Logo from "../assets/castillo logo.jpg";
 
-// const LoginPage = () => {
-//   const [credentials, setCredentials] = useState({ username: '', password: '' });
-//   const [error, setError] = useState(null);
-//   const { login: contextLogin } = useAuth(); // Función del AuthContext
-//   const navigate = useNavigate();
+export const Login = () => {
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center bg-gray-50 p-4 absolute inset-0 z-0"
+      style={{
+        backgroundImage: `linear-gradient(rgba(216, 68, 68, 0.6), rgba(30, 30, 42, 0.95)), url('/src/assets/wallpaper.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="w-full max-w-[400px] p-5 ">
+        <div className="bg-white rounded-[10px] shadow-[0_10px_30px_rgba(0,0,0,0.1)] px-10 py-5 text-center">
+          <div className="logo flex justify-center items-center">
+            <img
+              src={Logo}
+              alt="logo"
+              className="h-36 w-36 object-cover mb-0 rounded-full"
+            />
+          </div>
 
-//   const handleChange = (e) => {
-//     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-//   };
+          <form className="formulario mt-2" action="administrator_menu.html">
+            <h2 className="text-[28px] text-gray-800 mb-6">Iniciar Sesión</h2>
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError(null);
+            <div className="input-group mb-5 text-left">
+              <label
+                htmlFor="correo"
+                className="block mb-0 text-gray-600 font-bold"
+              >
+                Correo Electrónico
+              </label>
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                placeholder="tu@email.com"
+                required
+                className="w-full px-3 py-3 border border-gray-200 rounded-md text-base transition-colors focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_5px_rgba(102,126,234,0.5)]"
+              />
+            </div>
 
-//     try {
-//       const data = await authService.login(credentials.username, credentials.password);
+            <div className="input-group mb-5 text-left">
+              <label
+                htmlFor="contrasena"
+                className="block mb-0 text-gray-600 font-bold"
+              >
+                Contraseña
+              </label>
+              <input
+                type="password"
+                id="contrasena"
+                name="contrasena"
+                placeholder="Contraseña"
+                required
+                className="w-full px-3 py-3 border border-gray-200 rounded-md text-base transition-colors focus:outline-none focus:border-indigo-500 focus:shadow-[0_0_5px_rgba(102,126,234,0.5)]"
+              />
+            </div>
 
-//       // 1. Guardar en el contexto global
-//       contextLogin(data);
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#e30713] text-white rounded-md text-base mt-2 hover:bg-black transition-colors"
+            >
+              Ingresar
+            </button>
 
-//       // 2. Redirigir según el rol que devuelva Django
-//       if (data.user.role === 'admin') {
-//         navigate('/admin');
-//       } else {
-//         navigate('/seller');
-//       }
-//     } catch (err) {
-//       setError("Credenciales inválidas o error de servidor");
-//     }
-//   };
-
-//   return (
-//     <div className="login-container">
-//       <form onSubmit={handleSubmit}>
-//         <h2>Iniciar Sesión</h2>
-//         {error && <p style={{ color: 'red' }}>{error}</p>}
-
-//         <input name="username" placeholder="Usuario" onChange={handleChange} />
-//         <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} />
-
-//         <button type="submit">Entrar</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
+            <a
+              href="#"
+              className="block mt-5 text-indigo-500 text-sm hover:underline"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};

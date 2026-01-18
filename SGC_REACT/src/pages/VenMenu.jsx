@@ -2,16 +2,17 @@ import React from "react";
 import { Navbar } from "../components/navbar";
 import { Button } from "../components/Button";
 import { Footer } from "../components/footer";
+import fabric from "../assets/fabric-svgrepo-com.svg";
+import sewingMachine from "../assets/sewing-machine-svgrepo-com.svg";
 
-<Navbar />
+<Navbar />;
 export function VenMenu() {
   return (
     <div className="min-h-screen flex flex-col relative bg-gray-900">
-
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
-            backgroundImage: `linear-gradient(rgba(216, 68, 68, 0.6), rgba(30, 30, 42, 0.95)), url('/src/assets/wallpaper.png')`,
+          backgroundImage: `linear-gradient(rgba(216, 68, 68, 0.6), rgba(30, 30, 42, 0.95)), url('/src/assets/wallpaper.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -33,24 +34,21 @@ export function VenMenu() {
 
           {/* Grid responsive */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             <Button
-    
-            title="Registro de retazos"
-            description="Generación de Qr y registro de retazos"
-
+              title="Registro de retazos"
+              description="Generación de Qr y registro de retazos"
+              image={fabric}
             />
-            <Button 
-            title="Consulta y verificación de retazos" 
-            description="Registro de retazos introducidos al sistema" 
-              
+            <Button
+              title="Consulta y verificación de retazos"
+              description="Registro de retazos introducidos al sistema"
+              image={sewingMachine}
             />
-            
           </div>
         </section>
       </main>
     </div>
   );
 }
-    <Footer />
+<Footer />;
 export default VenMenu;
