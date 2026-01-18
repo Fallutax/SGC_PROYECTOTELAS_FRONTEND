@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Navbar } from "../components/navbar";
-import { Footer } from "../components/footer";
+import { ButtonExp } from "../components/ButtonExp";
+
 
 // 🟡 DATOS DE EJEMPLO - REEMPLAZA CON LLAMADA A TU BACKEND
 const vendedorasEjemplo = [
@@ -18,7 +18,19 @@ const vendedorasEjemplo = [
   },
   {
     id: "07",
-    nombre: "Maria",
+    nombre: "WEara",
+    apellido: "Putina",
+    username: "Cerosiete",
+    email: "Cerosiete3267@gmail.com",
+    telefono: "22237498327",
+    status: "Activo",
+    fechaRegistro: "02/12/2027",
+    password: "sdosiete3267",
+    administradorId: "ADMIN-001"
+  },
+  {
+    id: "07",
+    nombre: "Luisa",
     apellido: "Putina",
     username: "Cerosiete",
     email: "Cerosiete3267@gmail.com",
@@ -30,19 +42,7 @@ const vendedorasEjemplo = [
   },
   {
     id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
+    nombre: "puto",
     apellido: "Putina",
     username: "Cerosiete",
     email: "Cerosiete3267@gmail.com",
@@ -165,6 +165,30 @@ export function GestionVen() {
     }
   };
 
+  // Funciones de exportación
+  const exportarExcel = () => {
+    // 🔴 Aquí irá tu lógica para exportar a Excel
+    console.log("Exportando a Excel...");
+    // Ejemplo: npm install xlsx
+    // import * as XLSX from 'xlsx';
+    // const ws = XLSX.utils.json_to_sheet(vendedorasFiltradas);
+    // const wb = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, "Vendedoras");
+    // XLSX.writeFile(wb, "vendedoras.xlsx");
+  };
+
+  const exportarPDF = () => {
+    // 🔴 Aquí irá tu lógica para exportar a PDF
+    console.log("Exportando a PDF...");
+    // Ejemplo: npm install jspdf
+    // import jsPDF from 'jspdf';
+    // const doc = new jsPDF();
+    // doc.text("Reporte de Vendedoras", 10, 10);
+    // doc.save("vendedoras.pdf");
+  };
+
+
+
   return (
     <div className="min-h-screen flex flex-col relative bg-gray-900">
       {/* Fondo idéntico a VenMenu */}
@@ -178,6 +202,8 @@ export function GestionVen() {
       />
 
 
+
+
       <main className="relative z-10 flex-1 px-4 py-8">
         <div className="w-full max-w-6xl mx-auto">
 
@@ -189,17 +215,8 @@ export function GestionVen() {
 
           {/* Barra de búsqueda y botón de registro */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
-            
-            {/* Botón Registrar */}
-            <button
-              onClick={() => alert("Abrir formulario de registro")}
-              className="bg-gradient-to-r from-white to-white text-black px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              + Registrar Vendedora
-            </button>
-
-            {/* Búsqueda */}
-            <div className="flex-1">
+             {/* Búsqueda */}
+             <div className="flex-1">
               <input
                 type="text"
                 placeholder="Buscar por ID, nombre, apellido, email, teléfono, status..."
@@ -208,6 +225,21 @@ export function GestionVen() {
                 className="w-full px-4 py-3 bg-[#262729] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
+            {/* Botón Registrar */}
+            <button
+            
+              onClick={() => alert("Abrir formulario de registro")}
+              className="bg-gradient-to-r from-white to-white text-black px-3 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              
+              + Registrar 
+            </button>
+
+             {/* Botones de exportación */}
+             <ButtonExp 
+              onExportExcel={exportarExcel}
+              onExportPDF={exportarPDF}
+            />
           </div>
 
           {/* Tarjetas de vendedoras - MÁXIMO 6 POR PÁGINA */}
