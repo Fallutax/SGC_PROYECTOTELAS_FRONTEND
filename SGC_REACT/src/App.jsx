@@ -6,20 +6,20 @@ import { Toaster } from "react-hot-toast";
 import { AdmMenu } from "./pages/AdmMenu";
 import { VenMenu } from "./pages/VenMenu";
 import { Navbar } from "./components/navbar";
-import {Footer} from "./components/footer";
+import { Footer } from "./components/footer";
 import { RegistroRetazos } from "./pages/RegistroRetazos";
-
-
-
-
+import { ConsultaVen } from "./pages/ConsultaVen";
+import { Login } from "./pages/Login";
 
 function App() {
   return (
     <BrowserRouter>
-    <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/tasks" />} />
         <Route path="/adm-menu" element={<AdmMenu />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/consulta-ven" element={<ConsultaVen />} />
         <Route path="/ven-menu" element={<VenMenu />} />
         <Route path="/registro-retazos" element={<RegistroRetazos />} />
         <Route path="/tasks" element={<TasksPage />} />
