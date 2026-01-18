@@ -10,6 +10,12 @@ import { Footer } from "./components/footer";
 import { RegistroRetazos } from "./pages/RegistroRetazos";
 import { ConsultaVen } from "./pages/ConsultaVen";
 import { Login } from "./pages/Login";
+import { GestionVen } from "./pages/GestionVen";
+
+
+
+
+
 
 function App() {
   return (
@@ -25,6 +31,7 @@ function App() {
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/tasks-create" element={<TaskFormPage />} />
         <Route path="/tasks/:id" element={<TaskFormPage />} />
+        <Route path="/gestion-ven" element={<GestionVen />} />
       </Routes>
       <Toaster />
       <Footer />
@@ -33,3 +40,5 @@ function App() {
 }
 
 export default App;
+
+

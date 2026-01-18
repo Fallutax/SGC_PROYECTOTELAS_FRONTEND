@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Navbar } from "../components/navbar";
 import { Button } from "../components/Button";
 import { Footer } from "../components/footer";
@@ -6,6 +7,7 @@ import fabric from "../assets/fabric-svgrepo-com.svg";
 import sewingMachine from "../assets/sewing-machine-svgrepo-com.svg";
 
 <Navbar />;
+
 export function VenMenu() {
   return (
     <div className="min-h-screen flex flex-col relative bg-gray-900">
@@ -51,4 +53,3 @@ export function VenMenu() {
   );
 }
 <Footer />;
-export default VenMenu;
