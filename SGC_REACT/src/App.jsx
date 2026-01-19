@@ -9,6 +9,7 @@ import { Navbar } from "./components/navbar";
 import {Footer} from "./components/footer";
 import { RegistroRetazos } from "./pages/RegistroRetazos";
 import { GestionVen } from "./pages/GestionVen";
+import { RegistroTiposTela } from "./pages/RegistroTiposTela";
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/tasks-create" element={<TaskFormPage />} />
         <Route path="/tasks/:id" element={<TaskFormPage />} />
         <Route path="/gestion-ven" element={<GestionVen />} />
+        <Route path="/registro-tipos-tela" element={<RegistroTiposTela />} />
       </Routes>
       <Toaster />
       <Footer />

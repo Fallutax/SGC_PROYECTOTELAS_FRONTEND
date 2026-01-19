@@ -1,46 +1,43 @@
 import React, { useState } from "react";
+import Image from "../assets/castillo logo.jpg";
 
-import { ButtonExp } from "../components/ButtonExp";
 
 
 // 🟡 DATOS DE EJEMPLO - REEMPLAZA CON LLAMADA A TU BACKEND
-const vendedorasEjemplo = [
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  
-  // ... más datos
+const tiposDeTelasEjemplo = [
+    {
+        fabric_type_id: "171",
+        type: "Algodon",
+        last_update: "02/12/2027",
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis officia nulla vel tempora cupiditate sed consequuntur in iusto vero, perferendis est ipsam harum. Pariatur natus dolores nihil consectetur obcaecati. Id!",
+        price_unit: 10,
+        qr: Image,
+        name: "Azul agua dura"
+    },
+    
+    // ... más datos
 ];
 
-export function GestionVen() {
-  const [vendedoras, setVendedoras] = useState(vendedorasEjemplo); // 🔴 REEMPLAZAR: useState([]) y fetch desde backend
+export function RegistroTiposTela() {
+  const [tiposDeTelas, setTiposDeTelas] = useState(tiposDeTelasEjemplo); // 🔴 REEMPLAZAR: useState([]) y fetch desde backend
   const [filtro, setFiltro] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
-  const [vendedoraEditando, setVendedoraEditando] = useState(null); // Para el modal de edición
+  const [tiposDeTelasEditando, setTiposDeTelasEditando] = useState(null); // Para el modal de edición
   const [formEdit, setFormEdit] = useState({}); // Formulario de edición
   const elementosPorPagina = 6;
 
   // 🔴 REEMPLAZAR: Conectar con tu endpoint de búsqueda
-  const vendedorasFiltradas = vendedoras.filter((v) =>
+  const tiposDeTelasFiltradas = tiposDeTelas.filter((v) =>
     Object.values(v).some((val) =>
       String(val).toLowerCase().includes(filtro.toLowerCase())
     )
   );
 
   // Lógica de paginación
-  const totalPaginas = Math.ceil(vendedorasFiltradas.length / elementosPorPagina);
+  const totalPaginas = Math.ceil(tiposDeTelasFiltradas.length / elementosPorPagina);
   const indiceInicio = (paginaActual - 1) * elementosPorPagina;
   const indiceFin = indiceInicio + elementosPorPagina;
-  const vendedorasPaginadas = vendedorasFiltradas.slice(indiceInicio, indiceFin);
+  const tiposDeTelasPaginadas = tiposDeTelasFiltradas.slice(indiceInicio, indiceFin);
 
   // Cambiar de página
   const cambiarPagina = (nuevaPagina) => {
@@ -49,45 +46,34 @@ export function GestionVen() {
     }
   };
 
-  // 🔴 ELIMINAR: Elimina la vendedora del estado local
-  const eliminarVendedora = (id) => {
-    if (window.confirm("¿Estás seguro de eliminar esta vendedora?")) {
-      setVendedoras(prev => prev.filter(v => v.id !== id));
-      alert("Vendedora eliminada exitosamente");
+  // 🔴 ELIMINAR: Elimina la tiposDeTelas del estado local
+  const eliminarTiposDeTelas = (fabric_type_id) => {
+    if (window.confirm("¿Estás seguro de eliminar esta tiposDeTelas?")) {
+      setTiposDeTelas(prev => prev.filter(v => v.fabric_type_id !== fabric_type_id));
+      alert("tiposDeTelas eliminada exitosamente");
     }
   };
 
   // 🔴 EDITAR: Abre el modal de edición
-  const editarVendedora = (vendedora) => {
-    setVendedoraEditando(vendedora);
-    setFormEdit({...vendedora}); // Copia todos los campos
+  const editarTiposDeTelas = (tiposDeTela) => {
+    setTiposDeTelasEditando(tiposDeTela);
+    setFormEdit({...tiposDeTela}); // Copia todos los campos
   };
 
-  // 🔴 GUARDAR EDICIÓN: Actualiza la vendedora en el estado local
+  // 🔴 GUARDAR EDICIÓN: Actualiza la tiposDeTelas en el estado local
   const guardarEdicion = () => {
-    setVendedoras(prev => 
-      prev.map(v => v.id === formEdit.id ? {...formEdit} : v)
+    setTiposDeTelas(prev => 
+      prev.map(v => v.fabric_type_id === formEdit.fabric_type_id ? {...formEdit} : v)
     );
-    setVendedoraEditando(null);
+    setTiposDeTelasEditando(null);
     setFormEdit({});
-    alert("Vendedora actualizada exitosamente");
+    alert("tiposDeTelas actualizada exitosamente");
   };
 
   // 🔴 CANCELAR EDICIÓN: Cierra el modal sin guardar
   const cancelarEdicion = () => {
-    setVendedoraEditando(null);
+    setTiposDeTelasEditando(null);
     setFormEdit({});
-  };
-
-  // Funciones de exportación
-  const exportarExcel = () => {
-    console.log("Exportando a Excel...");
-    // 🔴 Implementa con librería xlsx
-  };
-
-  const exportarPDF = () => {
-    console.log("Exportando a PDF...");
-    // 🔴 Implementa con librería jspdf
   };
 
   return (
@@ -108,8 +94,8 @@ export function GestionVen() {
 
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-4">Gestión de Vendedoras</h1>
-            <p className="text-gray-300 text-lg">Administración completa del personal</p>
+            <h1 className="text-4xl font-bold text-white mb-4">Registro de los Tipos de Telas</h1>
+            <p className="text-gray-300 text-lg">Administración completa de las telas de las que parten los retazos</p>
           </div>
 
           {/* Barra de búsqueda y botones de acción */}
@@ -119,7 +105,7 @@ export function GestionVen() {
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Buscar por ID, nombre, apellido, email, teléfono, status..."
+                placeholder="Buscar por ID, precio, tipo, fecha..."
                 value={filtro}
                 onChange={(e) => setFiltro(e.target.value)}
                 className="w-full px-4 py-3 bg-[#262729] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -131,51 +117,37 @@ export function GestionVen() {
               onClick={() => alert("Abrir formulario de registro")}
               className="bg-gradient-to-r from-white to-white text-black px-3 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              + Registrar 
+            + Registrar 
             </button>
+        </div>
 
-            {/* Botones de exportación con iconos */}
-            <ButtonExp 
-              onExportExcel={exportarExcel}
-              onExportPDF={exportarPDF}
-            />
-          </div>
-
-          {/* Tarjetas de vendedoras - MÁXIMO 6 POR PÁGINA */}
+          {/* Tarjetas de tiposDeTelas - MÁXIMO 6 POR PÁGINA */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {vendedorasPaginadas.map((vendedora) => (
+            {tiposDeTelasPaginadas.map((tiposDeTela) => (
               <div
-                key={vendedora.id}
+                key={tiposDeTela.fabric_type_id}
                 className="bg-gradient-to-br from-[#3a3b3c]/90 to-[#2a2b2c]/90 rounded-xl shadow-lg p-6 border border-gray-600 hover:border-[#ec4444] transition-all duration-300"
               >
                 {/* Header de la tarjeta */}
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-white font-bold text-lg">{vendedora.nombre} {vendedora.apellido}</h3>
-                    <p className="text-gray-300 text-sm">@{vendedora.username}</p>
+                    <h3 className="text-white font-bold text-lg">{tiposDeTela.fabric_type_id}/Tela de {tiposDeTela.type}</h3>
+           
                   </div>
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    vendedora.status === "Activo" 
-                      ? "bg-green-500/20 text-green-300 border border-green-500/50"
-                      : "bg-red-500/20 text-red-300 border border-red-500/50"
-                  }`}>
-                    {vendedora.status}
-                  </span>
                 </div>
-
-                {/* Datos principales */}
-                <div className="space-y-2 text-sm">
-                  <p><span className="text-gray-400">ID:</span> <span className="text-white">{vendedora.id}</span></p>
-                  <p><span className="text-gray-400">Email:</span> <span className="text-white">{vendedora.email}</span></p>
-                  <p><span className="text-gray-400">Teléfono:</span> <span className="text-white">{vendedora.telefono}</span></p>
-                  <p><span className="text-gray-400">Registro:</span> <span className="text-white">{vendedora.fechaRegistro}</span></p>
-                  <p><span className="text-gray-400">Registrado por el administrador:</span> <span className="text-white">{vendedora.administradorId}</span></p>
-                </div>
-
-                {/* Acciones con iconos */}
+                                <div className="space-y-2 text-sm">
+                                  <p><span className="text-gray-400">ID:</span> <span className="text-white">{tiposDeTela.fabric_type_id}</span></p>
+                                  <p><span className="text-gray-400">Fecha de registro:</span> <span className="text-white">{tiposDeTela.last_update}</span></p>
+                                  <p><span className="-1/2 overflow-hidden text-ellipsis text-gray-400">Descripcion:</span> <br /><span className="text-white">{tiposDeTela.description}</span></p>
+                                  <p><span className="text-gray-400">Precio por unidad (metro):</span> <span className="text-white">{tiposDeTela.price_unit} $</span></p>
+                                  <p><span className="text-gray-400">Nombre:</span> <span className="text-white">{tiposDeTela.name}</span></p>
+                                  <div className="mt-2 px-8 py-8 sm:">
+                                    <img src={tiposDeTela.qr} alt={tiposDeTela.name} className="w-full h-auto rounded-lg" />
+                                  </div>
+                                </div>
                 <div className="flex gap-2 mt-6">
                   <button 
-                    onClick={() => editarVendedora(vendedora)}
+                    onClick={() => editarTiposDeTelas(tiposDeTela)}
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded text-sm transition-colors flex items-center justify-center gap-1"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,7 +156,7 @@ export function GestionVen() {
                       Editar
                   </button>
                   <button 
-                    onClick={() => eliminarVendedora(vendedora.id)}
+                    onClick={() => eliminarTiposDeTelas(tiposDeTela.fabric_type_id)}
                     className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded text-sm transition-colors flex items-center justify-center gap-1"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,9 +170,9 @@ export function GestionVen() {
           </div>
 
           {/* Mensaje si no hay resultados */}
-          {vendedorasFiltradas.length === 0 && (
+          {tiposDeTelasFiltradas.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No se encontraron vendedoras con ese criterio.</p>
+              <p className="text-gray-400 text-lg">No se encontraron tiposDeTelas con ese criterio.</p>
             </div>
           )}
 
@@ -244,78 +216,54 @@ export function GestionVen() {
       </main>
 
       {/* Modal de Edición */}
-      {vendedoraEditando && (
+      {tiposDeTelasEditando && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-gradient-to-br from-[#3a3b3c] to-[#2a2b2c] rounded-xl shadow-2xl p-8 border border-[#ec4444] max-w-md w-full mx-4">
-            <h2 className="text-2xl font-bold text-white mb-6">Editar Vendedora</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Editar tipos De Telas</h2>
             
             <form onSubmit={(e) => { e.preventDefault(); guardarEdicion(); }} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Tipo de tela</label>
                 <input
                   type="text"
-                  value={formEdit.nombre || ''}
-                  onChange={(e) => setFormEdit({...formEdit, nombre: e.target.value})}
+                  value={formEdit.type || ''}
+                  onChange={(e) => setFormEdit({...formEdit, type: e.target.value})}
                   className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
               </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Apellido</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Descripcion</label>
                 <input
                   type="text"
-                  value={formEdit.apellido || ''}
-                  onChange={(e) => setFormEdit({...formEdit, apellido: e.target.value})}
+                  value={formEdit.description || ''}
+                  onChange={(e) => setFormEdit({...formEdit, description: e.target.value})}
+                  className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                  required
+                />
+              <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Precio por unidad(metro)</label>
+                <input
+                  type= "float"
+                  value={formEdit.price_unit || ''}
+                  onChange={(e) => setFormEdit({...formEdit, price_unit: e.target.value})}
                   className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
               </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Username</label>
-                <input
+              <label className="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
+              <input
                   type="text"
-                  value={formEdit.username || ''}
-                  onChange={(e) => setFormEdit({...formEdit, username: e.target.value})}
+                  value={formEdit.name || ''}
+                  onChange={(e) => setFormEdit({...formEdit, name: e.target.value})}
                   className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
+              <div>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                <input
-                  type="email"
-                  value={formEdit.email || ''}
-                  onChange={(e) => setFormEdit({...formEdit, email: e.target.value})}
-                  className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
               </div>
-              
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Teléfono</label>
-                <input
-                  type="tel"
-                  value={formEdit.telefono || ''}
-                  onChange={(e) => setFormEdit({...formEdit, telefono: e.target.value})}
-                  className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
-                <select
-                  value={formEdit.status || ''}
-                  onChange={(e) => setFormEdit({...formEdit, status: e.target.value})}
-                  className="w-full px-4 py-2 bg-[#262729] border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                >
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
               </div>
 
               {/* Botones de acción */}
@@ -342,4 +290,4 @@ export function GestionVen() {
   );
 }
 
-export default GestionVen;
+export default RegistroTiposTela;
