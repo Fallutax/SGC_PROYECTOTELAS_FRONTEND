@@ -11,9 +11,11 @@ import { RegistroRetazos } from "./pages/RegistroRetazos";
 import { ConsultaVen } from "./pages/ConsultaVen";
 import { Login } from "./pages/Login";
 import { GestionVen } from "./pages/GestionVen";
-import { GestionRetazo } from "./pages/GestionRetazo";
+import { RegistroTiposTela } from "./pages/RegistroTiposTela";
+import { personasApi } from "./api/tasks.api";
 
 function App() {
+  personasApi();
   return (
     <BrowserRouter>
       <Navbar />
@@ -28,7 +30,7 @@ function App() {
         <Route path="/tasks-create" element={<TaskFormPage />} />
         <Route path="/tasks/:id" element={<TaskFormPage />} />
         <Route path="/gestion-ven" element={<GestionVen />} />
-        <Route path="/gestion-retazo" element={<GestionRetazo />} />
+        <Route path="/registro-tipos-tela" element={<RegistroTiposTela />} />
       </Routes>
       <Toaster />
       <Footer />
