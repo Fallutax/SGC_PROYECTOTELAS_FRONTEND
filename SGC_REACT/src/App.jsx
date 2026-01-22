@@ -11,11 +11,7 @@ import { RegistroRetazos } from "./pages/RegistroRetazos";
 import { ConsultaVen } from "./pages/ConsultaVen";
 import { Login } from "./pages/Login";
 import { GestionVen } from "./pages/GestionVen";
-
-
-
-
-
+import { GestionRetazo } from "./pages/GestionRetazo";
 
 function App() {
   return (
@@ -32,6 +28,7 @@ function App() {
         <Route path="/tasks-create" element={<TaskFormPage />} />
         <Route path="/tasks/:id" element={<TaskFormPage />} />
         <Route path="/gestion-ven" element={<GestionVen />} />
+        <Route path="/gestion-retazo" element={<GestionRetazo />} />
       </Routes>
       <Toaster />
       <Footer />
@@ -40,5 +37,3 @@ function App() {
 }
 
 export default App;
-
-

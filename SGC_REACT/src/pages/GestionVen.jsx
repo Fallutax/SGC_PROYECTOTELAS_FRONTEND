@@ -1,162 +1,174 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ButtonExp } from "../components/ButtonExp";
-
+import { getFakerApi } from "../api/tasks.api";
 
 // 🟡 DATOS DE EJEMPLO - REEMPLAZA CON LLAMADA A TU BACKEND
-const vendedorasEjemplo = [
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "WEara",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "22237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "sdosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Luisa",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "puto",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Maria",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  {
-    id: "07",
-    nombre: "Juam",
-    apellido: "Putina",
-    username: "Cerosiete",
-    email: "Cerosiete3267@gmail.com",
-    telefono: "798237498327",
-    status: "Activo",
-    fechaRegistro: "02/12/2027",
-    password: "Cerosiete3267",
-    administradorId: "ADMIN-001"
-  },
-  // ... (más datos de ejemplo)
-];
+// const vendedorasEjemplo = [
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "WEara",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "22237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "sdosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Luisa",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "puto",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Maria",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   {
+//     id: "07",
+//     nombre: "Juam",
+//     apellido: "Putina",
+//     username: "Cerosiete",
+//     email: "Cerosiete3267@gmail.com",
+//     telefono: "798237498327",
+//     status: "Activo",
+//     fechaRegistro: "02/12/2027",
+//     password: "Cerosiete3267",
+//     administradorId: "ADMIN-001"
+//   },
+//   // ... (más datos de ejemplo)
+// ];
 
 export function GestionVen() {
-  const [vendedoras] = useState(vendedorasEjemplo); // 🔴 REEMPLAZAR: useState([]) y fetch desde backend
+  // 🔴 REEMPLAZAR: useState([]) y fetch desde backend
   const [filtro, setFiltro] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
   const elementosPorPagina = 6; // ✅ Máximo 6 elementos por página
 
+  const [faker, setFaker] = useState([]);
+  useEffect(() => {
+    async function loadFaker() {
+      const res = await getFakerApi();
+      setFaker(res.data.data);
+    }
+
+    loadFaker();
+  }, []);
+
   // 🔴 REEMPLAZAR: Conectar con tu endpoint de búsqueda
-  const vendedorasFiltradas = vendedoras.filter((v) =>
+  const vendedorasFiltradas = faker.filter((v) =>
     Object.values(v).some((val) =>
-      String(val).toLowerCase().includes(filtro.toLowerCase())
-    )
+      String(val).toLowerCase().includes(filtro.toLowerCase()),
+    ),
   );
 
   // Lógica de paginación
-  const totalPaginas = Math.ceil(vendedorasFiltradas.length / elementosPorPagina);
+  const totalPaginas = Math.ceil(
+    vendedorasFiltradas.length / elementosPorPagina,
+  );
   const indiceInicio = (paginaActual - 1) * elementosPorPagina;
   const indiceFin = indiceInicio + elementosPorPagina;
-  const vendedorasPaginadas = vendedorasFiltradas.slice(indiceInicio, indiceFin);
+  const fakerPaginado = vendedorasFiltradas.slice(indiceInicio, indiceFin);
 
   // Cambiar de página
   const cambiarPagina = (nuevaPagina) => {
@@ -187,12 +199,10 @@ export function GestionVen() {
     // doc.save("vendedoras.pdf");
   };
 
-
-
   return (
     <div className="min-h-screen flex flex-col relative bg-gray-900">
       {/* Fondo idéntico a VenMenu */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `linear-gradient(rgba(216, 68, 68, 0.6), rgba(30, 30, 42, 0.95)), url('/src/assets/wallpaper.png')`,
@@ -201,22 +211,22 @@ export function GestionVen() {
         }}
       />
 
-
-
-
       <main className="relative z-10 flex-1 px-4 py-8">
         <div className="w-full max-w-6xl mx-auto">
-
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-4">Gestión de Vendedoras</h1>
-            <p className="text-gray-300 text-lg">Administración completa del personal</p>
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Gestión de Vendedoras
+            </h1>
+            <p className="text-gray-300 text-lg">
+              Administración completa del personal
+            </p>
           </div>
 
           {/* Barra de búsqueda y botón de registro */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
-             {/* Búsqueda */}
-             <div className="flex-1">
+            {/* Búsqueda */}
+            <div className="flex-1">
               <input
                 type="text"
                 placeholder="Buscar por ID, nombre, apellido, email, teléfono, status..."
@@ -227,16 +237,14 @@ export function GestionVen() {
             </div>
             {/* Botón Registrar */}
             <button
-            
               onClick={() => alert("Abrir formulario de registro")}
               className="bg-gradient-to-r from-white to-white text-black px-3 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              
-              + Registrar 
+              + Registrar
             </button>
 
-             {/* Botones de exportación */}
-             <ButtonExp 
+            {/* Botones de exportación */}
+            <ButtonExp
               onExportExcel={exportarExcel}
               onExportPDF={exportarPDF}
             />
@@ -244,32 +252,39 @@ export function GestionVen() {
 
           {/* Tarjetas de vendedoras - MÁXIMO 6 POR PÁGINA */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {vendedorasPaginadas.map((vendedora) => (
+            {fakerPaginado.map((fakers) => (
               <div
-                key={vendedora.id}
+                key={fakers.id}
                 className="bg-gradient-to-br from-[#3a3b3c]/90 to-[#2a2b2c]/90 rounded-xl shadow-lg p-6 border border-gray-600 hover:border-[#ec4444] transition-all duration-300"
               >
                 {/* Header de la tarjeta */}
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-white font-bold text-lg">{vendedora.nombre} {vendedora.apellido}</h3>
-                    <p className="text-gray-300 text-sm">@{vendedora.username}</p>
+                    <h3 className="text-white font-bold text-lg">
+                      {fakers.firstname} {fakers.lastname}
+                    </h3>
+                    <p className="text-gray-300 text-sm">@{fakers.email}</p>
                   </div>
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    vendedora.status === "Activo" 
-                      ? "bg-green-500/20 text-green-300 border border-green-500/50"
-                      : "bg-red-500/20 text-red-300 border border-red-500/50"
-                  }`}>
-                    {vendedora.status}
-                  </span>
                 </div>
 
                 {/* Datos principales */}
                 <div className="space-y-2 text-sm">
-                  <p><span className="text-gray-400">ID:</span> <span className="text-white">{vendedora.id}</span></p>
-                  <p><span className="text-gray-400">Email:</span> <span className="text-white">{vendedora.email}</span></p>
-                  <p><span className="text-gray-400">Teléfono:</span> <span className="text-white">{vendedora.telefono}</span></p>
-                  <p><span className="text-gray-400">Registro:</span> <span className="text-white">{vendedora.fechaRegistro}</span></p>
+                  <p>
+                    <span className="text-gray-400">ID:</span>{" "}
+                    <span className="text-white">{fakers.id}</span>
+                  </p>
+                  <p>
+                    <span className="text-gray-400">Email:</span>{" "}
+                    <span className="text-white">{fakers.email}</span>
+                  </p>
+                  <p>
+                    <span className="text-gray-400">Teléfono:</span>{" "}
+                    <span className="text-white">{fakers.phone}</span>
+                  </p>
+                  <p>
+                    <span className="text-gray-400">Registro:</span>{" "}
+                    <span className="text-white">{fakers.birthday}</span>
+                  </p>
                 </div>
 
                 {/* Acciones */}
@@ -288,7 +303,9 @@ export function GestionVen() {
           {/* Mensaje si no hay resultados */}
           {vendedorasFiltradas.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No se encontraron vendedoras con ese criterio.</p>
+              <p className="text-gray-400 text-lg">
+                No se encontraron vendedoras con ese criterio.
+              </p>
             </div>
           )}
 
@@ -304,19 +321,21 @@ export function GestionVen() {
               </button>
 
               <div className="flex gap-1">
-                {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((numero) => (
-                  <button
-                    key={numero}
-                    onClick={() => cambiarPagina(numero)}
-                    className={`px-3 py-2 rounded-lg transition-colors ${
-                      paginaActual === numero
-                        ? "bg-red-600 text-white"
-                        : "bg-[#3a3b3c] hover:bg-[#4a4b4c] text-white"
-                    }`}
-                  >
-                    {numero}
-                  </button>
-                ))}
+                {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(
+                  (numero) => (
+                    <button
+                      key={numero}
+                      onClick={() => cambiarPagina(numero)}
+                      className={`px-3 py-2 rounded-lg transition-colors ${
+                        paginaActual === numero
+                          ? "bg-red-600 text-white"
+                          : "bg-[#3a3b3c] hover:bg-[#4a4b4c] text-white"
+                      }`}
+                    >
+                      {numero}
+                    </button>
+                  ),
+                )}
               </div>
 
               <button
@@ -330,10 +349,6 @@ export function GestionVen() {
           )}
         </div>
       </main>
-
-
     </div>
   );
 }
-
-export default GestionVen;
